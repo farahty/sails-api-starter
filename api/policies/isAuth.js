@@ -9,7 +9,8 @@ module.exports = function (req, res, next) {
   var token = req.header('Authorization').split(' ')[1];
   var payload = null;
   try {
-    payload = jwt.decode(token, sails.config.secret);
+    //payload = jwt.decode(token, sails.config.secret);
+    payload = jwt.decode(token, 'KGJGJHWDWDWXWcwcwc87w9c798w7c98bw78c97w9cwc');
   } catch (err) {
     return res.status(401).json({error : err.message});
   }
