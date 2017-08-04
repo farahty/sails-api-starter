@@ -13,13 +13,13 @@ module.exports = function (req, res, next) {
     if (err) {
       return res.status(403).send(err);
     } else if (!user) {
-      return res.status(403).send(res.i18n('You Don\'t have permission to access this route'));
+      return res.status(403).send({error : res.i18n('You Don\'t have permission to access this route')});
     } else {
       Permission.findOne(where).populate('roles').exec(function (err, permission) {
         if (err) {
           return res.forbidden(err);
         } else if (!permission) {
-          return res.status(403).send(res.i18n('You Don\'t have permission to access this route'));
+          return res.status(403).send({error : res.i18n('You Don\'t have permission to access this route')});
         } else {
           var userRoles = _.pluck(user.roles, 'id');
           var permissionRoles = _.pluck(permission.roles, 'id');
@@ -27,7 +27,7 @@ module.exports = function (req, res, next) {
           if (matches) {
             return next();
           } else {
-            return res.status(403).send(res.i18n('You Don\'t have permission to access this route'));
+            return res.status(403).send({error: res.i18n('You Don\'t have permission to access this route')});
           }
         }
       });
