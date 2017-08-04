@@ -1,6 +1,6 @@
 module.exports = function (req, res, next) {
 
-  if(req.user.email == sails.config.admin.email){
+  if(req.user.email == 'nimer.farahty@gmail.com'){
     return next();
   }
 
